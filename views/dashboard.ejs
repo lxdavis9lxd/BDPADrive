@@ -1,0 +1,75 @@
+<%- include('partials/header') %>
+
+<div class="dashboard-section">
+  <h2>Welcome to Your Dashboard</h2>
+  
+  <% if(locals.success_msg && success_msg.length > 0) { %>
+    <div class="alert alert-success">
+      <%= success_msg %>
+    </div>
+  <% } %>
+  
+  <% if(locals.error_msg && error_msg.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= error_msg %>
+    </div>
+  <% } %>
+  
+  <div class="dashboard-content">
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <h3>Total Files</h3>
+        <p class="stat-number">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Storage Used</h3>
+        <p class="stat-number">0 MB</p>
+      </div>
+      <div class="stat-card">
+        <h3>Storage Limit</h3>
+        <p class="stat-number">1 GB</p>
+      </div>
+    </div>
+    
+    <div class="dashboard-files">
+      <div class="files-header">
+        <h3>Your Files</h3>
+        <button class="btn-upload">Upload New File</button>
+      </div>
+      
+      <div class="file-list">
+        <% if (files && files.length > 0) { %>
+          <table class="files-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Last Modified</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% files.forEach(function(file) { %>
+                <tr>
+                  <td><%= file.name %></td>
+                  <td><%= file.size %></td>
+                  <td><%= file.lastModified %></td>
+                  <td>
+                    <a href="/files/<%= file.id %>/download" class="btn-action">Download</a>
+                    <a href="/files/<%= file.id %>/delete" class="btn-action btn-delete">Delete</a>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } else { %>
+          <div class="empty-state">
+            <p>You don't have any files yet. Click the Upload button to add your first file.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

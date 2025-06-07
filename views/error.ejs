@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<div class="error-section">
+  <h2><%= message %></h2>
+  <% if (error && error.status) { %>
+    <p>Status Code: <%= error.status %></p>
+  <% } %>
+  <p>Sorry for the inconvenience. Please try again later or go back to the <a href="/">home page</a>.</p>
+  
+  <% if (process.env.NODE_ENV === 'development' && error.stack) { %>
+    <div class="error-details">
+      <h3>Error Details (Development Only)</h3>
+      <pre><%= error.stack %></pre>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
